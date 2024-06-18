@@ -116,6 +116,7 @@ func (c *MultiCache) Del(key string) {
 	wg.Wait() // Wait for both goroutines to finish
 }
 
+// Del_ALL deletes the entire data from both Redis and in-memory caches concurrently.
 func (c *MultiCache) Del_ALL() {
 	var wg sync.WaitGroup
 	wg.Add(2) // Add two goroutines to the wait group

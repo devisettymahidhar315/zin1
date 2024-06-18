@@ -88,6 +88,7 @@ func (c *LRUCache) Print() string {
 	return result
 }
 
+// DEL_ALL delete the entire data
 func (c *LRUCache) DEL_ALL() {
 	for elem := c.list.Front(); elem != nil; {
 		next := elem.Next() // Store the next element before removing the current one

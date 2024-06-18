@@ -49,22 +49,3 @@ func PrintRedisCache(ctx *gin.Context) {
 func DeleteAll(ctx *gin.Context) {
 	cache.Del_ALL()
 }
-
-// func InitializeRoutes() *gin.Engine {
-
-// 	//storing the values in the cache
-// 	// cache.Set("a", "1", length)
-// 	// cache.Set("b", "2", length)
-
-// 	//intiliazes the restapi with gin
-// 	r := gin.Default()
-
-// 	// r.GET("/:key", GetCacheValue)
-// 	// r.DELETE("/:key", DeleteCacheValue)
-// 	// r.POST("/:key/:value", SetCacheValue)
-// 	// r.GET("/redis/print", PrintRedisCache)
-// 	// r.GET("/inmemory/print", PrintInMemoryCache)
-// 	// r.DELETE("/all", DeleteAll)
-
-// 	return r
-// }

@@ -144,6 +144,7 @@ func (c *LRUCache) Del(key string) {
 	}
 }
 
+// DEL_ALL delete the entire data
 func (c *LRUCache) DEL_ALL() {
 	c.client.FlushAll(ctx)
 }

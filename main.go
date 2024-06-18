@@ -7,7 +7,7 @@ import (
 
 func Hello() *gin.Engine {
 
-	// // Initialize the Gin router and routes
+	// Initialize the Gin router and routes
 	r := gin.Default()
 
 	r.GET("/:key", api.GetCacheValue)
@@ -17,7 +17,5 @@ func Hello() *gin.Engine {
 	r.GET("/inmemory/print", api.PrintInMemoryCache)
 	r.DELETE("/all", api.DeleteAll)
 
-	// // Start the server
-	//r.Run()
 	return r
 }
