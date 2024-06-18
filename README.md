@@ -28,6 +28,7 @@
 
 # Accessing the Functions
 ## Get Function
+### you can access on web broswer
 ### redis data ```http://localhost:8080/redis/print```
 ### inmemory data ```http://localhost:8080/inmemory/print```
 ### particular data ```http://localhost:8080/key```
