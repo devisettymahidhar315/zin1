@@ -16,6 +16,6 @@ func Hello() *gin.Engine {
 	r.GET("/redis/print", api.PrintRedisCache)
 	r.GET("/inmemory/print", api.PrintInMemoryCache)
 	r.DELETE("/all", api.DeleteAll)
-	r.Run()
+
 	return r
 }
