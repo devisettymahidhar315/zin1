@@ -2,6 +2,7 @@ package testing
 
 import (
 	"testing"
+	"time"
 
 	"github.com/devisettymahidhar315/zin1/in_memory"
 	"github.com/devisettymahidhar315/zin1/multi_cache"
@@ -15,11 +16,11 @@ const len1 = 2
 // TestPut_inmemory tests the Put method of the inmemory cache
 func TestPut_inmemory(t *testing.T) {
 	// Initialize a new inmemory cache
-	cache := in_memory.NewLRUCache()
+	cache := in_memory.NewLRUCache(1 * time.Second)
 
 	// Insert key-value pairs into the cache
-	cache.Put("a1", "1", len1)
-	cache.Put("b1", "2", len1)
+	cache.Put("a1", "1", len1, -1)
+	cache.Put("b1", "2", len1, -1)
 
 	// Retrieve the value for key "a1"
 	result := cache.Get("a1")
@@ -34,11 +35,11 @@ func TestPut_inmemory(t *testing.T) {
 
 func TestGet_inmemory(t *testing.T) {
 	// Initialize a new inmemory cache
-	cache := in_memory.NewLRUCache()
+	cache := in_memory.NewLRUCache(1 * time.Second)
 
 	// Insert key-value pairs into the cache
-	cache.Put("a1", "1", len1)
-	cache.Put("b1", "2", len1)
+	cache.Put("a1", "1", len1, -1)
+	cache.Put("b1", "2", len1, -1)
 
 	// Retrieve the value for key "a1"
 	result := cache.Get("a1")
@@ -56,11 +57,11 @@ func TestGet_inmemory(t *testing.T) {
 // TestPrint_inmemory tests the Print method of the inmemory cache
 func TestPrint_inmemory(t *testing.T) {
 	// Initialize a new inmemory cache
-	cache := in_memory.NewLRUCache()
+	cache := in_memory.NewLRUCache(1 * time.Second)
 
 	// Insert key-value pairs into the cache
-	cache.Put("a1", "1", len1)
-	cache.Put("b1", "2", len1)
+	cache.Put("a1", "1", len1, -1)
+	cache.Put("b1", "2", len1, -1)
 
 	// Print the current state of the cache
 	result := cache.Print()
@@ -72,7 +73,7 @@ func TestPrint_inmemory(t *testing.T) {
 	}
 
 	// Insert another key-value pair to exceed the cache length
-	cache.Put("c1", "3", len1)
+	cache.Put("c1", "3", len1, -1)
 
 	// Print the current state of the cache
 	result = cache.Print()
@@ -87,10 +88,10 @@ func TestPrint_inmemory(t *testing.T) {
 // TestDel_inmemory tests the Del method of the inmemory cache
 func TestDel_inmemory(t *testing.T) {
 	// Initialize a new inmemory cache
-	cache := in_memory.NewLRUCache()
+	cache := in_memory.NewLRUCache(1 * time.Second)
 
 	// Insert a key-value pair into the cache
-	cache.Put("a1", "1", len1)
+	cache.Put("a1", "1", len1, -1)
 
 	// Delete the key "a1"
 	cache.Del("a1")
@@ -105,8 +106,8 @@ func TestDel_inmemory(t *testing.T) {
 	}
 
 	// Insert key-value pairs into the cache
-	cache.Put("a1", "1", len1)
-	cache.Put("b1", "2", len1)
+	cache.Put("a1", "1", len1, -1)
+	cache.Put("b1", "2", len1, -1)
 
 	// Delete the key "a1"
 	cache.Del("a1")
@@ -121,15 +122,15 @@ func TestDel_inmemory(t *testing.T) {
 	}
 }
 
-// TestDelAll_inmemory tests the Del_All method of the inmemory cache
+//TestDelAll_inmemory tests the Del_All method of the inmemory cache
 
 func TestDelAll_inmemory(t *testing.T) {
 	// Initialize a new inmemory  cache
-	cache := in_memory.NewLRUCache()
+	cache := in_memory.NewLRUCache(1 * time.Second)
 	// Insert a key-value pair into the cache
 
-	cache.Put("a", "1", len1)
-	cache.Put("b", "2", len1)
+	cache.Put("a", "1", len1, -1)
+	cache.Put("b", "2", len1, -1)
 
 	// Delete all key
 	cache.DEL_ALL()
@@ -152,8 +153,8 @@ func TestPut_redis(t *testing.T) {
 	cache := redis.NewLRUCache()
 
 	// Insert key-value pairs into the cache
-	cache.Put("a1", "1", len1)
-	cache.Put("b1", "2", len1)
+	cache.Put("a1", "1", len1, -1)
+	cache.Put("b1", "2", len1, -1)
 
 	// Retrieve the value for key "a1"
 	result := cache.Get("a1")
@@ -170,8 +171,8 @@ func TestGet_redis(t *testing.T) {
 	cache := redis.NewLRUCache()
 
 	// Insert key-value pairs into the cache
-	cache.Put("a1", "1", len1)
-	cache.Put("b1", "2", len1)
+	cache.Put("a1", "1", len1, -1)
+	cache.Put("b1", "2", len1, -1)
 
 	// Retrieve the value for key "a1"
 	result := cache.Get("a1")
@@ -192,8 +193,8 @@ func TestPrint_redis(t *testing.T) {
 	cache := redis.NewLRUCache()
 
 	// Insert key-value pairs into the cache
-	cache.Put("a1", "1", len1)
-	cache.Put("b1", "2", len1)
+	cache.Put("a1", "1", len1, -1)
+	cache.Put("b1", "2", len1, -1)
 
 	// Print the current state of the cache
 	result := cache.Print()
@@ -206,7 +207,7 @@ func TestPrint_redis(t *testing.T) {
 	}
 
 	// Insert another key-value pair to exceed the cache length
-	cache.Put("c1", "3", len1)
+	cache.Put("c1", "3", len1, -1)
 
 	// Print the current state of the cache
 	result = cache.Print()
@@ -224,7 +225,7 @@ func TestDel_redis(t *testing.T) {
 	cache := redis.NewLRUCache()
 
 	// Insert a key-value pair into the cache
-	cache.Put("a1", "1", len1)
+	cache.Put("a1", "1", len1, -1)
 
 	// Delete the key "a1"
 	cache.Del("a1")
@@ -246,8 +247,8 @@ func TestDelAll_redis(t *testing.T) {
 	cache := redis.NewLRUCache()
 	// Insert a key-value pair into the cache
 
-	cache.Put("a", "1", len1)
-	cache.Put("b", "2", len1)
+	cache.Put("a", "1", len1, -1)
+	cache.Put("b", "2", len1, -1)
 
 	// Delete all key
 	cache.DEL_ALL()
@@ -269,8 +270,8 @@ func TestGET(t *testing.T) {
 	// Create a new multi-cache instance
 	cache := multi_cache.NewMultiCache()
 	// Set key-value pairs in the cache
-	cache.Set("a", "1", len1)
-	cache.Set("b", "2", len1)
+	cache.Set("a", "1", len1, -1)
+	cache.Set("b", "2", len1, -1)
 
 	// Test case 1: Get a non-existent key
 	res1 := cache.Get("c")
@@ -290,8 +291,8 @@ func TestPrint(t *testing.T) {
 	// Create a new multi-cache instance
 	cache := multi_cache.NewMultiCache()
 	// Set key-value pairs in the cache
-	cache.Set("a", "1", len1)
-	cache.Set("b", "2", len1)
+	cache.Set("a", "1", len1, -1)
+	cache.Set("b", "2", len1, -1)
 
 	// Get the printed results from both in-memory and Redis caches
 	inmemory_result := cache.Print_in_mem()
@@ -302,7 +303,7 @@ func TestPrint(t *testing.T) {
 	}
 
 	// Set another key-value pair to exceed the cache capacity
-	cache.Set("c", "3", len1)
+	cache.Set("c", "3", len1, -1)
 	inmemory_result = cache.Print_in_mem()
 	redis_result = cache.Print_redis()
 
@@ -318,8 +319,8 @@ func TestDel(t *testing.T) {
 	// Create a new multi-cache instance
 	cache := multi_cache.NewMultiCache()
 	// Set key-value pairs in the cache
-	cache.Set("a", "1", len1)
-	cache.Set("b", "2", len1)
+	cache.Set("a", "1", len1, -1)
+	cache.Set("b", "2", len1, -1)
 
 	// Delete a key from the cache
 	cache.Del("a")

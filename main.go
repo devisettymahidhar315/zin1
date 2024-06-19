@@ -12,10 +12,10 @@ func Hello() *gin.Engine {
 
 	r.GET("/:key", api.GetCacheValue)
 	r.DELETE("/:key", api.DeleteCacheValue)
-	r.POST("/:key/:value", api.SetCacheValue)
+	r.POST("/:key/:value/:time", api.SetCacheValue)
 	r.GET("/redis/print", api.PrintRedisCache)
 	r.GET("/inmemory/print", api.PrintInMemoryCache)
 	r.DELETE("/all", api.DeleteAll)
-
+	r.Run()
 	return r
 }

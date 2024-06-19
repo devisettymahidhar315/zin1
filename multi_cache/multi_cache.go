@@ -2,6 +2,7 @@ package multi_cache
 
 import (
 	"sync"
+	"time"
 
 	"github.com/devisettymahidhar315/zin1/in_memory"
 	"github.com/devisettymahidhar315/zin1/redis"
@@ -17,23 +18,23 @@ type MultiCache struct {
 func NewMultiCache() *MultiCache {
 	return &MultiCache{
 		redisCache:    redis.NewLRUCache(),
-		inMemoryCache: in_memory.NewLRUCache(),
+		inMemoryCache: in_memory.NewLRUCache(1 * time.Second),
 	}
 }
 
 // Set stores the key-value pair in both Redis and in-memory caches concurrently.
-func (c *MultiCache) Set(key, value string, length int) {
+func (c *MultiCache) Set(key, value string, length int, t int) {
 	var wg sync.WaitGroup
 	wg.Add(2) // Add two goroutines to the wait group
 	// Store in Redis cache concurrently
 	go func() {
 		defer wg.Done()
-		c.redisCache.Put(key, value, length)
+		c.redisCache.Put(key, value, length, t)
 	}()
 	// Store in inmemory cache concurrently
 	go func() {
 		defer wg.Done()
-		c.inMemoryCache.Put(key, value, length)
+		c.inMemoryCache.Put(key, value, length, t)
 	}()
 	wg.Wait() // Wait for both goroutines to finish
 }
